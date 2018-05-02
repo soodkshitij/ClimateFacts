@@ -121,16 +121,15 @@ def run():
     c.updateBloomFilter()
     leader_node = 0
     heart_beat_count = 0
-    #requests.get("http://cmpe275-spring-18.mybluemix.net/delete/"+(config.get_node_details(node_id))[0])
+    requests.get("http://cmpe275-spring-18.mybluemix.net/delete/"+(config.get_node_details(node_id))[0])
     while(True):
         time.sleep(heartbeat_interval)
         heart_beat_count+=1
         leader = c.getLeaderNode(node_id)
         if leader_node != leader.id and leader.id == node_id:
             if leader_node != 0:
-                pass
-                #requests.get("http://cmpe275-spring-18.mybluemix.net/delete/"+config.get_node_details(leader_node)[0])
-            #requests.get("http://cmpe275-spring-18.mybluemix.net/put/"+config.get_node_details(leader.id)[0])
+                requests.get("http://cmpe275-spring-18.mybluemix.net/delete/"+config.get_node_details(leader_node)[0])
+            requests.get("http://cmpe275-spring-18.mybluemix.net/put/"+config.get_node_details(leader.id)[0])
             leader_node = leader.id
             logger.info("Publish node_id {} to external cluster".format(node_id))
             if heart_beat_count*heartbeat_interval==bloom_filter_interval:

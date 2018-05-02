@@ -9,7 +9,7 @@ logger = lg.get_logger()
 
 class Server():
     def __init__(self, node_id):
-        self.id = node_id  #Get from config
+        self.id = node_id
         self.status = 'FOLLOWER'  
         self.leader_id = None
         self.election_timeout = randint(1000,5000)/1000
